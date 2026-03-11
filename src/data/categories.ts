@@ -1,0 +1,88 @@
+import type { Category } from '../types';
+
+export const categories: Category[] = [
+  {
+    id: 'network-config',
+    label: 'Configuration réseau',
+    description: 'Adresses IP, interfaces, passerelles, DNS',
+    icon: 'Network',
+    color: 'blue',
+  },
+  {
+    id: 'connectivity',
+    label: 'Connectivité / Routage',
+    description: 'Ping, traceroute, routes, ARP',
+    icon: 'ArrowRightLeft',
+    color: 'cyan',
+  },
+  {
+    id: 'dns',
+    label: 'DNS / Résolution de noms',
+    description: 'nslookup, dig, résolution inverse',
+    icon: 'Globe',
+    color: 'indigo',
+  },
+  {
+    id: 'discovery',
+    label: 'Découverte réseau',
+    description: 'Scan de plage IP, ARP, MAC lookup',
+    icon: 'Radar',
+    color: 'violet',
+  },
+  {
+    id: 'nmap',
+    label: 'Scan Nmap',
+    description: 'Scan de ports, détection OS/services',
+    icon: 'ScanSearch',
+    color: 'orange',
+  },
+  {
+    id: 'ports-processes',
+    label: 'Ports / Processus',
+    description: 'netstat, connexions actives, PID',
+    icon: 'Cpu',
+    color: 'yellow',
+  },
+  {
+    id: 'video-surveillance',
+    label: 'Vidéosurveillance',
+    description: 'Caméras IP, RTSP, NVR, Axis, Hikvision, Dahua',
+    icon: 'Camera',
+    color: 'red',
+  },
+  {
+    id: 'onvif',
+    label: 'ONVIF / Découverte',
+    description: 'Protocole ONVIF, WS-Discovery, Device Manager',
+    icon: 'Broadcast',
+    color: 'pink',
+  },
+  {
+    id: 'poe-switch',
+    label: 'PoE / Switch / VLAN',
+    description: 'Alimentation PoE, couche 2, VLAN, 802.1X',
+    icon: 'Plug',
+    color: 'green',
+  },
+  {
+    id: 'wireshark',
+    label: 'Wireshark / Capture',
+    description: 'Filtres de capture, analyse de trames',
+    icon: 'Activity',
+    color: 'teal',
+  },
+  {
+    id: 'cybersecurity',
+    label: 'Cybersécurité / Audit',
+    description: 'Audit Windows, droits, services, hardening',
+    icon: 'Shield',
+    color: 'amber',
+  },
+  {
+    id: 'terrain-tips',
+    label: 'Astuces terrain',
+    description: 'Méthodes pratiques, contournements, conseils pro',
+    icon: 'Wrench',
+    color: 'slate',
+  },
+];

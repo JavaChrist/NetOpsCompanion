@@ -1,0 +1,27 @@
+import { useCallback } from 'react';
+
+export function useCopyToClipboard() {
+  const copy = useCallback(async (text: string): Promise<boolean> => {
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+      // Fallback for older browsers / PWA
+      const el = document.createElement('textarea');
+      el.value = text;
+      el.style.position = 'fixed';
+      el.style.opacity = '0';
+      document.body.appendChild(el);
+      el.focus();
+      el.select();
+      const ok = document.execCommand('copy');
+      document.body.removeChild(el);
+      return ok;
+    } catch {
+      return false;
+    }
+  }, []);
+
+  return copy;
+}
