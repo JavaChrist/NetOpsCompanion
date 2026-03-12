@@ -108,13 +108,14 @@ export function DiagnosticDetailPage() {
       {/* Steps */}
       <div className="space-y-3">
         <h2 className="text-sm font-semibold text-slate-300">Étapes de diagnostic</h2>
-        {diag.steps.map((step) => {
-          const isCompleted = completedSteps.has(step.stepNumber);
-          const isExpanded = expandedStep === step.stepNumber;
+        {diag.steps.map((step, idx) => {
+          const stepId = step.stepNumber ?? step.order ?? idx;
+          const isCompleted = completedSteps.has(stepId);
+          const isExpanded = expandedStep === stepId;
 
           return (
             <div
-              key={step.stepNumber}
+              key={stepId}
               className={clsx(
                 'rounded-xl border transition-all',
                 isCompleted
@@ -125,10 +126,10 @@ export function DiagnosticDetailPage() {
               {/* Step header */}
               <div
                 className="flex items-center gap-3 p-4 cursor-pointer"
-                onClick={() => setExpandedStep(isExpanded ? null : step.stepNumber)}
+                onClick={() => setExpandedStep(isExpanded ? null : stepId)}
               >
                 <button
-                  onClick={(e) => { e.stopPropagation(); toggleStep(step.stepNumber); }}
+                  onClick={(e) => { e.stopPropagation(); toggleStep(stepId); }}
                   className="flex-shrink-0"
                 >
                   {isCompleted ? (
@@ -139,7 +140,7 @@ export function DiagnosticDetailPage() {
                 </button>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-slate-500 font-mono">#{step.stepNumber}</span>
+                    <span className="text-xs text-slate-500 font-mono">#{stepId}</span>
                     <span className={clsx('text-sm font-medium', isCompleted ? 'text-green-400 line-through' : 'text-slate-200')}>
                       {step.title}
                     </span>

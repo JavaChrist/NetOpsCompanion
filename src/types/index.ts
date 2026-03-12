@@ -70,13 +70,17 @@ export interface CommandExample {
 // ─── Diagnostic ────────────────────────────────────────────────────────────
 
 export interface DiagnosticStep {
-  stepNumber: number;
+  stepNumber?: number;
+  order?: number;
   title: string;
   description: string;
   commands?: string[];
   checkpoints?: string[];
+  checkpoint?: string;
   tip?: string;
   warning?: string;
+  caution?: string;
+  probableCauses?: string[];
 }
 
 export interface DiagnosticGuide {
@@ -110,6 +114,7 @@ export interface ChecklistSection {
   id: string;
   title: string;
   items: ChecklistItem[];
+  commands?: string[];
 }
 
 export interface ChecklistTemplate {
