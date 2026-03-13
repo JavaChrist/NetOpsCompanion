@@ -14,17 +14,21 @@
   --safe-right: env(safe-area-inset-right, 0px);
 }
 
-/* Safe area : pseudo-élément avant l'élément pour ne pas écraser le padding Tailwind */
-.safe-pt::before {
-  content: '';
-  display: block;
-  height: var(--safe-top);
+/* Safe area : padding-top = safe area + padding de base */
+.safe-pt {
+  padding-top: calc(var(--safe-top) + 0.75rem) !important;
 }
 
-.safe-pb::after {
-  content: '';
-  display: block;
-  height: var(--safe-bottom);
+.safe-pb {
+  padding-bottom: calc(var(--safe-bottom) + 0.75rem) !important;
+}
+
+.safe-pl {
+  padding-left: calc(var(--safe-left) + 1rem) !important;
+}
+
+.safe-pr {
+  padding-right: calc(var(--safe-right) + 1rem) !important;
 }
 
 /* Décale le sticky top pour qu'il commence sous la status bar */
