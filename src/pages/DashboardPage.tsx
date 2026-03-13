@@ -7,7 +7,6 @@ import {
   History,
   ArrowRight,
   TrendingUp,
-  Zap,
 } from 'lucide-react';
 import { commands } from '../data/commands';
 import { diagnostics } from '../data/diagnostics';
@@ -44,7 +43,7 @@ export function DashboardPage() {
       {/* Header */}
       <div>
         <div className="flex items-center gap-2 mb-1">
-          <Zap className="w-4 h-4 text-accent" />
+          <img src="/icons/logo32.png" alt="NetOps" className="w-4 h-4" />
           <span className="text-xs font-medium text-accent uppercase tracking-wider">NetOps Companion</span>
         </div>
         <h1 className="text-2xl font-bold text-white mb-1">Bonjour, technicien.</h1>

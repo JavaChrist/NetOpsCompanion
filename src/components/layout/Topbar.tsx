@@ -22,20 +22,21 @@ export function Topbar({ onMenuClick }: TopbarProps) {
   const label = pageLabels[pathBase] ?? 'NetOps Companion';
 
   return (
-    <header className="sticky top-0 z-30 flex items-center gap-3 px-4 py-3 border-b border-surface-600 bg-surface-900/90 backdrop-blur-sm">
+    <header className="sticky top-0 z-30 flex items-center gap-4 px-4 py-3 safe-pt border-b border-surface-600 bg-surface-900/90 backdrop-blur-sm">
       <button
         onClick={onMenuClick}
-        className="lg:hidden p-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-surface-700"
+        aria-label="Ouvrir le menu"
+        className="lg:hidden p-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-surface-700 touch-manipulation flex-shrink-0"
       >
         <Menu className="w-5 h-5" />
       </button>
 
-      <h1 className="text-sm font-medium text-slate-300 hidden sm:block flex-shrink-0">
+      <h1 className="text-sm font-semibold text-slate-300 hidden lg:block flex-shrink-0 min-w-[120px]">
         {label}
       </h1>
 
-      <div className="flex-1">
-        <SearchBar className="w-full max-w-2xl mx-auto" />
+      <div className="flex-1 px-2">
+        <SearchBar className="w-full max-w-2xl" />
       </div>
 
       <button className="p-2 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-surface-700 flex-shrink-0">

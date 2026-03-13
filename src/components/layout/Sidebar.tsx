@@ -8,7 +8,6 @@ import {
   Star,
   History,
   Settings,
-  Wifi,
   X,
 } from 'lucide-react';
 
@@ -54,15 +53,15 @@ export function Sidebar({ open, onClose }: SidebarProps) {
           'fixed top-0 left-0 z-50 h-full w-64 flex flex-col',
           'bg-surface-800 border-r border-surface-600',
           'transition-transform duration-200 ease-in-out',
-          'lg:translate-x-0 lg:static lg:z-auto',
+          'lg:relative lg:translate-x-0 lg:z-auto lg:h-full lg:w-full',
           open ? 'translate-x-0' : '-translate-x-full'
         )}
       >
         {/* Logo */}
-        <div className="flex items-center justify-between px-4 py-4 border-b border-surface-600">
-          <div className="flex items-center gap-2.5">
-            <div className="p-1.5 rounded-lg bg-accent/20 border border-accent/30">
-              <Wifi className="w-4 h-4 text-accent" />
+        <div className="flex items-center justify-between px-2 py-3 safe-pt border-b border-surface-600">
+          <div className="flex items-center gap-3">
+            <div className="p-1.5 rounded-lg bg-accent/20 border border-accent/30 flex-shrink-0">
+              <img src="/icons/logo48.png" alt="NetOps" className="w-6 h-6" />
             </div>
             <div>
               <span className="text-sm font-semibold text-white">NetOps</span>
@@ -101,7 +100,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
         </nav>
 
         {/* Bottom */}
-        <div className="px-3 py-3 border-t border-surface-600 space-y-0.5">
+        <div className="px-3 py-3 safe-pb border-t border-surface-600 space-y-0.5">
           {bottomItems.map(({ to, icon: Icon, label }) => (
             <NavLink
               key={to}
