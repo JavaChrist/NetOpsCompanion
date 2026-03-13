@@ -12,7 +12,7 @@ export default defineConfig({
         name: 'NetOps Companion',
         short_name: 'NetOps',
         description: 'Assistant réseau & vidéosurveillance pour techniciens terrain',
-        theme_color: '#0a0e1a',
+        theme_color: '#3b82f6',
         background_color: '#0a0e1a',
         display: 'standalone',
         orientation: 'portrait-primary',
@@ -20,20 +20,16 @@ export default defineConfig({
         start_url: '/',
         icons: [
           {
-            src: '/icons/icon-192.png',
+            src: '/icons/logo192.png',
             sizes: '192x192',
             type: 'image/png',
+            purpose: 'any maskable',
           },
           {
-            src: '/icons/icon-512.png',
+            src: '/icons/logo512.png',
             sizes: '512x512',
             type: 'image/png',
-          },
-          {
-            src: '/icons/icon-512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'maskable',
+            purpose: 'any maskable',
           },
         ],
       },
