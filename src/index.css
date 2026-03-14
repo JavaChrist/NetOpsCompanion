@@ -7,12 +7,80 @@
 :root {
   color-scheme: dark;
 
-  /* Safe area iOS — accessibles comme variables CSS custom */
+  /* Couleurs surface — thème sombre */
+  --surface-900: #0a0e1a;
+  --surface-800: #0f1629;
+  --surface-700: #151d35;
+  --surface-600: #1c2640;
+  --surface-500: #243050;
+
+  /* Safe area iOS */
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   --safe-left: env(safe-area-inset-left, 0px);
   --safe-right: env(safe-area-inset-right, 0px);
 }
+
+/* ── Thème clair ─────────────────────────────────────────────────────────── */
+html.light {
+  color-scheme: light;
+
+  --surface-900: #f1f5f9;
+  --surface-800: #ffffff;
+  --surface-700: #f8fafc;
+  --surface-600: #e2e8f0;
+  --surface-500: #cbd5e1;
+}
+
+html.light body {
+  background-color: #f1f5f9 !important;
+  color: #1e293b !important;
+}
+
+/* Backgrounds en mode clair — hors sidebar et topbar */
+html.light body                          { background-color: #f1f5f9 !important; color: #1e293b !important; }
+html.light .bg-surface-900:not(aside):not(header) { background-color: #f1f5f9 !important; }
+html.light .bg-surface-800:not(aside)   { background-color: #ffffff !important; }
+html.light .bg-surface-700:not(aside)   { background-color: #f8fafc !important; }
+html.light .bg-surface-600:not(aside)   { background-color: #e2e8f0 !important; }
+html.light .bg-surface-500:not(aside)   { background-color: #cbd5e1 !important; }
+
+html.light .border-surface-600          { border-color: #e2e8f0 !important; }
+html.light .border-surface-500          { border-color: #cbd5e1 !important; }
+html.light .divide-surface-600\/50      { border-color: rgba(226,232,240,0.5) !important; }
+
+/* Textes en mode clair — hors sidebar et topbar */
+html.light .text-white     { color: #0f172a !important; }
+html.light .text-slate-200 { color: #1e293b !important; }
+html.light .text-slate-300 { color: #334155 !important; }
+html.light .text-slate-400 { color: #475569 !important; }
+html.light .text-slate-500 { color: #64748b !important; }
+html.light .text-slate-600 { color: #94a3b8 !important; }
+
+/* Sidebar en mode clair : fond clair, textes sombres */
+html.light aside        { background-color: #ffffff !important; }
+
+html.light aside .text-white,
+html.light aside .text-slate-200,
+html.light aside .text-slate-300 { color: #0f172a !important; }
+
+html.light aside .text-slate-400,
+html.light aside .text-slate-500 { color: #475569 !important; }
+
+html.light aside .text-slate-600  { color: #94a3b8 !important; }
+
+html.light aside .bg-surface-700,
+html.light aside .bg-surface-800  { background-color: #f8fafc !important; }
+
+html.light aside .border-surface-600 { border-color: #e2e8f0 !important; }
+
+/* Topbar : toujours sombre */
+html.light header.sticky { background-color: #0a0e1a !important; }
+html.light header.sticky .text-white,
+html.light header.sticky .text-slate-200,
+html.light header.sticky .text-slate-300,
+html.light header.sticky .text-slate-400,
+html.light header.sticky .text-slate-500 { color: #e2e8f0 !important; }
 
 /* Safe area : padding-top = safe area + padding de base */
 .safe-pt {
@@ -60,7 +128,7 @@ body {
 }
 
 body {
-  background-color: #0a0e1a;
+  background-color: var(--surface-900);
   color: #e2e8f0;
   font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;

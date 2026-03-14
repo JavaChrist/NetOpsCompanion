@@ -12,7 +12,7 @@ import { commands } from '../data/commands';
 import { diagnostics } from '../data/diagnostics';
 import { checklists } from '../data/checklists';
 import { categories } from '../data/categories';
-import { useHistoryStore } from '../store';
+import { useHistoryStore, useSettingsStore } from '../store';
 import { formatRelativeDate } from '../utils';
 import { CommandCard } from '../components/CommandCard';
 import { DiagnosticCard } from '../components/DiagnosticCard';
@@ -34,13 +34,15 @@ const quickAccess = [
 
 export function DashboardPage() {
   const { entries } = useHistoryStore();
+  const { showWelcome } = useSettingsStore();
 
   const recentEntries = entries.slice(0, 5);
   const featuredCommands = commands.filter((c) => ['cmd-ipconfig-all', 'cmd-nmap-ping-scan', 'cmd-arp-a', 'cmd-ping-basic'].includes(c.id));
 
   return (
     <div className="space-y-8">
-      {/* Header */}
+      {/* Header — conditionné par showWelcome */}
+      {showWelcome && (
       <div>
         <div className="flex items-center gap-2 mb-1">
           <img src="/icons/logo32.png" alt="NetOps" className="w-4 h-4" />
@@ -51,6 +53,7 @@ export function DashboardPage() {
           Votre assistant réseau & vidéosurveillance. Commandes, diagnostics et checklists en un seul endroit.
         </p>
       </div>
+      )}
 
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">

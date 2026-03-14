@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppLayout } from './components/layout/AppLayout';
 import { DashboardPage } from './pages/DashboardPage';
@@ -10,8 +11,17 @@ import { ChecklistDetailPage } from './pages/ChecklistDetailPage';
 import { FavoritesPage } from './pages/FavoritesPage';
 import { HistoryPage } from './pages/HistoryPage';
 import { SettingsPage } from './pages/SettingsPage';
+import { useSettingsStore } from './store';
 
 export default function App() {
+  const { theme } = useSettingsStore();
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.remove('dark', 'light');
+    root.classList.add(theme === 'dark' ? 'dark' : 'light');
+  }, [theme]);
+
   return (
     <BrowserRouter>
       <Routes>

@@ -21,18 +21,18 @@ function Toggle({ checked, onChange, label, description, icon }: ToggleProps) {
         </div>
       </div>
       <button
+        role="switch"
+        aria-checked={checked}
         onClick={() => onChange(!checked)}
         className={clsx(
-          'relative w-10 h-5.5 rounded-full transition-colors flex-shrink-0',
+          'relative flex-shrink-0 rounded-full transition-colors duration-200',
           checked ? 'bg-accent' : 'bg-surface-500'
         )}
-        style={{ height: '22px', width: '40px' }}
+        style={{ width: '44px', height: '24px' }}
       >
         <span
-          className={clsx(
-            'absolute top-0.5 w-4 h-4 rounded-full bg-white transition-transform shadow',
-            checked ? 'translate-x-5' : 'translate-x-0.5'
-          )}
+          className="absolute top-[2px] left-[2px] w-5 h-5 rounded-full bg-white shadow transition-transform duration-200"
+          style={{ transform: checked ? 'translateX(20px)' : 'translateX(0)' }}
         />
       </button>
     </div>
@@ -40,7 +40,7 @@ function Toggle({ checked, onChange, label, description, icon }: ToggleProps) {
 }
 
 export function SettingsPage() {
-  const { compactMode, showWelcome, update } = useSettingsStore();
+  const { theme, compactMode, showWelcome, update } = useSettingsStore();
 
   return (
     <div className="max-w-2xl space-y-6">
@@ -55,8 +55,8 @@ export function SettingsPage() {
         </div>
         <div className="px-4 divide-y divide-surface-600/50">
           <Toggle
-            checked={true}
-            onChange={() => {}}
+            checked={theme === 'dark'}
+            onChange={(v) => update({ theme: v ? 'dark' : 'light' })}
             label="Thème sombre"
             description="Le thème clair sera disponible dans une prochaine version"
             icon={<Moon className="w-4 h-4" />}
@@ -93,6 +93,10 @@ export function SettingsPage() {
           <div className="flex justify-between">
             <span>Stack</span>
             <span className="text-slate-300">React + Vite + TailwindCSS</span>
+          </div>
+          <div className="flex justify-between">
+            <span>Réalisé par</span>
+            <span className="text-accent font-medium">JavaChrist</span>
           </div>
         </div>
       </div>
