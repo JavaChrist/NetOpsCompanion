@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppLayout } from './components/layout/AppLayout';
+import { AuthGuard } from './components/auth/AuthGuard';
+import { LoginPage } from './pages/LoginPage';
+import { PricingPage } from './pages/PricingPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { CommandsPage } from './pages/CommandsPage';
 import { CommandDetailPage } from './pages/CommandDetailPage';
@@ -12,9 +15,11 @@ import { FavoritesPage } from './pages/FavoritesPage';
 import { HistoryPage } from './pages/HistoryPage';
 import { SettingsPage } from './pages/SettingsPage';
 import { useSettingsStore } from './store';
+import { useAuthStore } from './store/authStore';
 
 export default function App() {
   const { theme } = useSettingsStore();
+  const { initialize } = useAuthStore();
 
   useEffect(() => {
     const root = document.documentElement;
@@ -22,20 +27,29 @@ export default function App() {
     root.classList.add(theme === 'dark' ? 'dark' : 'light');
   }, [theme]);
 
+  useEffect(() => {
+    initialize();
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<AppLayout />}>
-          <Route index element={<DashboardPage />} />
-          <Route path="commands" element={<CommandsPage />} />
-          <Route path="commands/:id" element={<CommandDetailPage />} />
-          <Route path="diagnostics" element={<DiagnosticsPage />} />
-          <Route path="diagnostics/:id" element={<DiagnosticDetailPage />} />
-          <Route path="checklists" element={<ChecklistsPage />} />
-          <Route path="checklists/:id" element={<ChecklistDetailPage />} />
-          <Route path="favorites" element={<FavoritesPage />} />
-          <Route path="history" element={<HistoryPage />} />
-          <Route path="settings" element={<SettingsPage />} />
+        <Route path="/login" element={<LoginPage />} />
+
+        <Route element={<AuthGuard />}>
+          <Route element={<AppLayout />}>
+            <Route index element={<DashboardPage />} />
+            <Route path="pricing" element={<PricingPage />} />
+            <Route path="commands" element={<CommandsPage />} />
+            <Route path="commands/:id" element={<CommandDetailPage />} />
+            <Route path="diagnostics" element={<DiagnosticsPage />} />
+            <Route path="diagnostics/:id" element={<DiagnosticDetailPage />} />
+            <Route path="checklists" element={<ChecklistsPage />} />
+            <Route path="checklists/:id" element={<ChecklistDetailPage />} />
+            <Route path="favorites" element={<FavoritesPage />} />
+            <Route path="history" element={<HistoryPage />} />
+            <Route path="settings" element={<SettingsPage />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
