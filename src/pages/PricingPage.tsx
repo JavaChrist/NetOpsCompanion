@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { Check, Zap, Calendar } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Check, Zap, Calendar, CheckCircle } from 'lucide-react';
 import { useAuthStore } from '../store/authStore';
 import { clsx } from 'clsx';
 
@@ -15,7 +16,23 @@ const features = [
 export function PricingPage() {
   const [plan, setPlan] = useState<'monthly' | 'annual'>('annual');
   const [loading, setLoading] = useState(false);
-  const { user, subscription } = useAuthStore();
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const { user, subscription, fetchSubscription } = useAuthStore();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Détecter le retour après paiement Mollie
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get('success') === '1' && user) {
+      setPaymentSuccess(true);
+      // Recharger la subscription depuis Supabase
+      setTimeout(async () => {
+        await fetchSubscription(user.id);
+        navigate('/', { replace: true });
+      }, 3000);
+    }
+  }, [location, user]);
 
   const trialDaysLeft = subscription
     ? Math.max(0, Math.ceil((new Date(subscription.trial_ends_at).getTime() - Date.now()) / 86400000))
@@ -42,6 +59,17 @@ export function PricingPage() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
+
+      {/* Message succès paiement */}
+      {paymentSuccess && (
+        <div className="flex items-center gap-3 px-4 py-4 rounded-xl bg-green-500/10 border border-green-500/30 text-green-400">
+          <CheckCircle className="w-5 h-5 flex-shrink-0" />
+          <div>
+            <p className="font-medium">Paiement confirmé !</p>
+            <p className="text-sm text-green-500/80">Ton abonnement est actif. Redirection en cours…</p>
+          </div>
+        </div>
+      )}
 
       {/* Header */}
       <div className="text-center">
