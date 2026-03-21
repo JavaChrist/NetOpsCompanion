@@ -32,7 +32,7 @@ export function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-surface-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-surface-900 flex items-center justify-center p-4" style={{ minHeight: '-webkit-fill-available' }}>
       <div className="w-full max-w-md">
 
         {/* Logo */}
