@@ -15,6 +15,7 @@ const features = [
 
 export function PricingPage() {
   const [plan, setPlan] = useState<'monthly' | 'annual'>('annual');
+  const [firstName, setFirstName] = useState('');
   const [loading, setLoading] = useState(false);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const { user, subscription, fetchSubscription } = useAuthStore();
@@ -26,7 +27,6 @@ export function PricingPage() {
     const params = new URLSearchParams(location.search);
     if (params.get('success') === '1' && user) {
       setPaymentSuccess(true);
-      // Recharger la subscription depuis Supabase
       setTimeout(async () => {
         await fetchSubscription(user.id);
         navigate('/', { replace: true });
@@ -40,12 +40,16 @@ export function PricingPage() {
 
   const handleSubscribe = async () => {
     if (!user) return;
+    if (!firstName.trim()) {
+      alert('Merci d\'entrer ton prénom avant de continuer.');
+      return;
+    }
     setLoading(true);
     try {
       const res = await fetch('/api/create-checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plan, userId: user.id, email: user.email }),
+        body: JSON.stringify({ plan, userId: user.id, email: user.email, firstName: firstName.trim() }),
       });
       const data = await res.json();
       if (data.checkoutUrl) {
@@ -143,6 +147,21 @@ export function PricingPage() {
             </li>
           ))}
         </ul>
+
+        {/* Champ prénom */}
+        {subscription?.status !== 'active' && (
+          <div className="mb-4">
+            <label className="block text-xs font-medium text-slate-400 mb-1.5">Ton prénom</label>
+            <input
+              type="text"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              placeholder="Ex : Jean"
+              autoComplete="given-name"
+              className="w-full bg-surface-700 border border-surface-500 rounded-xl px-4 py-2.5 text-sm text-slate-200 placeholder-slate-500 outline-none focus:border-accent/60 focus:bg-surface-600 transition-all"
+            />
+          </div>
+        )}
 
         <button
           onClick={handleSubscribe}

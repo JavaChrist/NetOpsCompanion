@@ -17,6 +17,7 @@ export interface Subscription {
   user_id: string;
   status: SubscriptionStatus;
   plan: SubscriptionPlan | null;
+  first_name: string | null;
   mollie_customer_id: string | null;
   mollie_subscription_id: string | null;
   trial_ends_at: string;

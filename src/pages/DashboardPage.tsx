@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Terminal,
@@ -13,6 +14,7 @@ import { diagnostics } from '../data/diagnostics';
 import { checklists } from '../data/checklists';
 import { categories } from '../data/categories';
 import { useHistoryStore, useSettingsStore } from '../store';
+import { useAuthStore } from '../store/authStore';
 import { formatRelativeDate } from '../utils';
 import { CommandCard } from '../components/CommandCard';
 import { DiagnosticCard } from '../components/DiagnosticCard';
@@ -35,9 +37,19 @@ const quickAccess = [
 export function DashboardPage() {
   const { entries } = useHistoryStore();
   const { showWelcome } = useSettingsStore();
+  const { subscription, user, fetchSubscription } = useAuthStore();
+
+  // Recharger la subscription à chaque visite du dashboard
+  useEffect(() => {
+    if (user) fetchSubscription(user.id);
+  }, [user?.id]);
 
   const recentEntries = entries.slice(0, 5);
   const featuredCommands = commands.filter((c) => ['cmd-ipconfig-all', 'cmd-nmap-ping-scan', 'cmd-arp-a', 'cmd-ping-basic'].includes(c.id));
+
+  const greeting = subscription?.first_name
+    ? `Bonjour, ${subscription.first_name}.`
+    : 'Bonjour, technicien.';
 
   return (
     <div className="space-y-8">
@@ -48,7 +60,7 @@ export function DashboardPage() {
           <img src="/icons/logo32.png" alt="NetOps" className="w-4 h-4" />
           <span className="text-xs font-medium text-accent uppercase tracking-wider">NetOps Companion</span>
         </div>
-        <h1 className="text-2xl font-bold text-white mb-1">Bonjour, technicien.</h1>
+        <h1 className="text-2xl font-bold text-white mb-1">{greeting}</h1>
         <p className="text-slate-400 text-sm">
           Votre assistant réseau & vidéosurveillance. Commandes, diagnostics et checklists en un seul endroit.
         </p>
