@@ -5,6 +5,7 @@ import {
   Terminal,
   Stethoscope,
   CheckSquare,
+  ShieldCheck,
   Star,
   History,
   Settings,
@@ -19,6 +20,7 @@ const navItems = [
   { to: '/commands', icon: Terminal, label: 'Commandes' },
   { to: '/diagnostics', icon: Stethoscope, label: 'Diagnostics' },
   { to: '/checklists', icon: CheckSquare, label: 'Checklists' },
+  { to: '/genetec', icon: ShieldCheck, label: 'Genetec' },
   { to: '/favorites', icon: Star, label: 'Favoris' },
   { to: '/history', icon: History, label: 'Historique' },
 ];
