@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { clsx } from 'clsx';
-import { ScrollText, ChevronDown, ChevronUp, AlertTriangle, Info } from 'lucide-react';
+import { ChevronDown, ChevronUp, AlertTriangle, Info } from 'lucide-react';
 import { logReferences } from '../../data/genetec';
 import { GenetecBreadcrumb } from '../../components/genetec/GenetecBreadcrumb';
 

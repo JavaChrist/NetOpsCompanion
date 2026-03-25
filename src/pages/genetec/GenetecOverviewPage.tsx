@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import {
-  ShieldCheck,
   LayoutDashboard,
   Camera,
   KeyRound,
@@ -9,9 +8,6 @@ import {
   ClipboardList,
   HelpCircle,
   Activity,
-  CheckCircle2,
-  AlertTriangle,
-  ArrowRight,
   Wifi,
   Server,
 } from 'lucide-react';
